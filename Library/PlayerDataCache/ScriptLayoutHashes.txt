@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/Users/Ilgizar/Documents/Unity projects/New Unity Project/quiz.apk
+C:/Users/Ilgizar/Documents/GitHub/UnityQuiz/quiz.apk
 SceneListBegin?
 Assets/Scenes/QuizScene.unity
 Assets/Scenes/DragAndDropScene.unity

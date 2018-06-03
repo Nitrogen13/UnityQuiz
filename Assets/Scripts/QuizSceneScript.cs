@@ -7,10 +7,13 @@ public class QuizSceneScript : MonoBehaviour
 
     public static int Score = 0;
     public static int QuestionNumber = 0;
-    private string[] Questions = { "На чем вы собираетесь отправляться в командировку?",
-        "Чем вы собираетесь заниматься в пути?", "В скольки звездочном отеле вы собираетесь проживать?",
-        "Какую одежду вы наденете на первую встречу с руководстовом?"};
-    private string[,] Answers =
+    private readonly string[] Questions =
+    {   "На чем вы собираетесь отправляться в командировку?",
+        "Чем вы собираетесь заниматься в пути?",
+        "В скольки звездочном отеле вы собираетесь проживать?",
+        "Какую одежду вы наденете на первую встречу с руководстовом?"
+    };
+    private readonly string[,] Answers =
     {
         {"Свой автомобиль", "Поезд", "Самолет", "Такси"},
         {"Спать", "Подготавливаться к работе", "Смотреть фильм", "Читать книгу"},
@@ -18,25 +21,33 @@ public class QuizSceneScript : MonoBehaviour
         {"Никакую", "Оденусь по дресс-коду", "Повседневную одежду", "Деловой костюм"}
     };
 
+    private readonly int[,] Scores =
+    {
+        {900, 1000, 500, 700},
+        {900, 1000, 100, 500},
+        {500, 1000, 1000, 900},
+        {0, 1100, 900, 1000}
+    };
+
     private Text QuestionText;
-    private Text ButtonA;
-    private Text ButtonB;
-    private Text ButtonC;
-    private Text ButtonD;
+    private GameObject ButtonA;
+    private GameObject ButtonB;
+    private GameObject ButtonC;
+    private GameObject ButtonD;
 
     private void Start()
     {
         QuestionText = GameObject.Find("Question").GetComponent<Text>();
-        ButtonA = GameObject.Find("ButtonTextA").GetComponent<Text>();
-        ButtonB = GameObject.Find("ButtonTextB").GetComponent<Text>();
-        ButtonC = GameObject.Find("ButtonTextC").GetComponent<Text>();
-        ButtonD = GameObject.Find("ButtonTextD").GetComponent<Text>();
+        ButtonA = GameObject.Find("ButtonTextA");
+        ButtonB = GameObject.Find("ButtonTextB");
+        ButtonC = GameObject.Find("ButtonTextC");
+        ButtonD = GameObject.Find("ButtonTextD");
 
         QuestionText.text = Questions[QuestionNumber];
-        ButtonA.text = Answers[QuestionNumber, 0];
-        ButtonB.text = Answers[QuestionNumber, 1];
-        ButtonC.text = Answers[QuestionNumber, 2];
-        ButtonD.text = Answers[QuestionNumber, 3];
+        ButtonA.GetComponent<Text>().text = Answers[QuestionNumber, 0];
+        ButtonB.GetComponent<Text>().text = Answers[QuestionNumber, 1];
+        ButtonC.GetComponent<Text>().text = Answers[QuestionNumber, 2];
+        ButtonD.GetComponent<Text>().text = Answers[QuestionNumber, 3];
     }
 
     private void NextQuestion()
@@ -48,62 +59,34 @@ public class QuizSceneScript : MonoBehaviour
         else
         {
             QuestionText.text = Questions[++QuestionNumber];
-            ButtonA.text = Answers[QuestionNumber, 0];
-            ButtonB.text = Answers[QuestionNumber, 1];
-            ButtonC.text = Answers[QuestionNumber, 2];
-            ButtonD.text = Answers[QuestionNumber, 3];
+            ButtonA.GetComponent<Text>().text = Answers[QuestionNumber, 0];
+            ButtonB.GetComponent<Text>().text = Answers[QuestionNumber, 1];
+            ButtonC.GetComponent<Text>().text = Answers[QuestionNumber, 2];
+            ButtonD.GetComponent<Text>().text = Answers[QuestionNumber, 3];
         }
     }
 
     public void ClickA()
     {
-        if (QuestionNumber == 0)
-            Score += 900;
-        if (QuestionNumber == 1)
-            Score += 900;
-        if (QuestionNumber == 2)
-            Score += 500;
-        if (QuestionNumber == 3)
-            Score += 0;
+        Score += Scores[QuestionNumber, 0];
         NextQuestion();
     }
 
     public void ClickB()
     {
-        if (QuestionNumber == 0)
-            Score += 1000;
-        if (QuestionNumber == 1)
-            Score += 1000;
-        if (QuestionNumber == 2)
-            Score += 1000;
-        if (QuestionNumber == 3)
-            Score += 1100;
+        Score += Scores[QuestionNumber, 1];
         NextQuestion();
     }
 
     public void ClickC()
     {
-        if (QuestionNumber == 0)
-            Score += 500;
-        if (QuestionNumber == 1)
-            Score += 100;
-        if (QuestionNumber == 2)
-            Score += 1000;
-        if (QuestionNumber == 3)
-            Score += 900;
+        Score += Scores[QuestionNumber, 2];
         NextQuestion();
     }
 
     public void ClickD()
     {
-        if (QuestionNumber == 0)
-            Score += 700;
-        if (QuestionNumber == 1)
-            Score += 500;
-        if (QuestionNumber == 2)
-            Score += 900;
-        if (QuestionNumber == 3)
-            Score += 1000;
+        Score += Scores[QuestionNumber, 3];
         NextQuestion();
     }
 }

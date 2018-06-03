@@ -15,7 +15,7 @@ public class DragDropSceneScript : MonoBehaviour
     private GameObject SlotC;
     private GameObject SlotD;
 
-    private string[] Answers = { "Документы", "Семью", "Собаку", "Деньги" };
+    private readonly string[] Answers = { "Документы", "Семью", "Собаку", "Деньги" };
 
     private void Start()
     {
