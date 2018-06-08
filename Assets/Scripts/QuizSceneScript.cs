@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 public class QuizSceneScript : MonoBehaviour
 {
 
-    public static int Score = 0;
-    public static int QuestionNumber = 0;
-    private readonly string[] Questions =
+    public static int[] score = new int[5];
+    public static int questionNumber = 0;
+    private readonly string[] questions =
     {   "На чем вы собираетесь отправляться в командировку?",
         "Чем вы собираетесь заниматься в пути?",
         "В скольки звездочном отеле вы собираетесь проживать?",
         "Какую одежду вы наденете на первую встречу с руководстовом?"
     };
-    private readonly string[,] Answers =
+    private readonly string[,] answers =
     {
         {"Свой автомобиль", "Поезд", "Самолет", "Такси"},
         {"Спать", "Подготавливаться к работе", "Смотреть фильм", "Читать книгу"},
@@ -21,7 +21,7 @@ public class QuizSceneScript : MonoBehaviour
         {"Никакую", "Оденусь по дресс-коду", "Повседневную одежду", "Деловой костюм"}
     };
 
-    private readonly int[,] Scores =
+    private readonly int[,] scores =
     {
         {900, 1000, 500, 700},
         {900, 1000, 100, 500},
@@ -29,64 +29,64 @@ public class QuizSceneScript : MonoBehaviour
         {0, 1100, 900, 1000}
     };
 
-    private Text QuestionText;
-    private GameObject ButtonA;
-    private GameObject ButtonB;
-    private GameObject ButtonC;
-    private GameObject ButtonD;
+    private Text questionText;
+    private GameObject buttonA;
+    private GameObject buttonB;
+    private GameObject buttonC;
+    private GameObject buttonD;
 
     private void Start()
     {
-        QuestionText = GameObject.Find("Question").GetComponent<Text>();
-        ButtonA = GameObject.Find("ButtonTextA");
-        ButtonB = GameObject.Find("ButtonTextB");
-        ButtonC = GameObject.Find("ButtonTextC");
-        ButtonD = GameObject.Find("ButtonTextD");
+        questionText = GameObject.Find("Question").GetComponent<Text>();
+        buttonA = GameObject.Find("ButtonTextA");
+        buttonB = GameObject.Find("ButtonTextB");
+        buttonC = GameObject.Find("ButtonTextC");
+        buttonD = GameObject.Find("ButtonTextD");
 
-        QuestionText.text = Questions[QuestionNumber];
-        ButtonA.GetComponent<Text>().text = Answers[QuestionNumber, 0];
-        ButtonB.GetComponent<Text>().text = Answers[QuestionNumber, 1];
-        ButtonC.GetComponent<Text>().text = Answers[QuestionNumber, 2];
-        ButtonD.GetComponent<Text>().text = Answers[QuestionNumber, 3];
+        questionText.text = questions[questionNumber];
+        buttonA.GetComponent<Text>().text = answers[questionNumber, 0];
+        buttonB.GetComponent<Text>().text = answers[questionNumber, 1];
+        buttonC.GetComponent<Text>().text = answers[questionNumber, 2];
+        buttonD.GetComponent<Text>().text = answers[questionNumber, 3];
     }
 
     private void NextQuestion()
     {
-        if (QuestionNumber == 3)
+        if (questionNumber == 3)
         {
             SceneManager.LoadScene("DragAndDropScene");
         }
         else
         {
-            QuestionText.text = Questions[++QuestionNumber];
-            ButtonA.GetComponent<Text>().text = Answers[QuestionNumber, 0];
-            ButtonB.GetComponent<Text>().text = Answers[QuestionNumber, 1];
-            ButtonC.GetComponent<Text>().text = Answers[QuestionNumber, 2];
-            ButtonD.GetComponent<Text>().text = Answers[QuestionNumber, 3];
+            questionText.text = questions[++questionNumber];
+            buttonA.GetComponent<Text>().text = answers[questionNumber, 0];
+            buttonB.GetComponent<Text>().text = answers[questionNumber, 1];
+            buttonC.GetComponent<Text>().text = answers[questionNumber, 2];
+            buttonD.GetComponent<Text>().text = answers[questionNumber, 3];
         }
     }
 
     public void ClickA()
     {
-        Score += Scores[QuestionNumber, 0];
+        score[questionNumber] = scores[questionNumber, 0];
         NextQuestion();
     }
 
     public void ClickB()
     {
-        Score += Scores[QuestionNumber, 1];
+        score[questionNumber] = scores[questionNumber, 1];
         NextQuestion();
     }
 
     public void ClickC()
     {
-        Score += Scores[QuestionNumber, 2];
+        score[questionNumber] = scores[questionNumber, 2];
         NextQuestion();
     }
 
     public void ClickD()
     {
-        Score += Scores[QuestionNumber, 3];
+        score[questionNumber] = scores[questionNumber, 3];
         NextQuestion();
     }
 }

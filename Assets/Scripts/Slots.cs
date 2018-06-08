@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 
 public class Slots : MonoBehaviour, IDropHandler {
-    public GameObject Item
+    public GameObject item
     {
         get
         {
@@ -14,7 +14,7 @@ public class Slots : MonoBehaviour, IDropHandler {
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (!Item)
+        if (!item)
             DragHandler.item.transform.SetParent(transform);
     }
 }

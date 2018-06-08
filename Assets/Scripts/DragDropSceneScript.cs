@@ -5,45 +5,45 @@ using UnityEngine.SceneManagement;
 public class DragDropSceneScript : MonoBehaviour
 {
 
-    private GameObject VariantA;
-    private GameObject VariantB;
-    private GameObject VariantC;
-    private GameObject VariantD;
+    private GameObject variantA;
+    private GameObject variantB;
+    private GameObject variantC;
+    private GameObject variantD;
 
-    private GameObject SlotA;
-    private GameObject SlotB;
-    private GameObject SlotC;
-    private GameObject SlotD;
+    private GameObject slotA;
+    private GameObject slotB;
+    private GameObject slotC;
+    private GameObject slotD;
 
-    private readonly string[] Answers = { "Документы", "Семью", "Собаку", "Деньги" };
+    private readonly string[] answers = { "Документы", "Семью", "Собаку", "Деньги" };
 
     private void Start()
     {
-        SlotA = GameObject.Find("SlotA");
-        SlotB = GameObject.Find("SlotB");
-        SlotC = GameObject.Find("SlotC");
-        SlotD = GameObject.Find("SlotD");
+        slotA = GameObject.Find("SlotA");
+        slotB = GameObject.Find("SlotB");
+        slotC = GameObject.Find("SlotC");
+        slotD = GameObject.Find("SlotD");
 
-        VariantA = GameObject.Find("VariantA");
-        VariantB = GameObject.Find("VariantB");
-        VariantC = GameObject.Find("VariantC");
-        VariantD = GameObject.Find("VariantD");
+        variantA = GameObject.Find("VariantA");
+        variantB = GameObject.Find("VariantB");
+        variantC = GameObject.Find("VariantC");
+        variantD = GameObject.Find("VariantD");
 
-        VariantA.GetComponentInChildren<Text>().text = Answers[0];
-        VariantB.GetComponentInChildren<Text>().text = Answers[1];
-        VariantC.GetComponentInChildren<Text>().text = Answers[2];
-        VariantD.GetComponentInChildren<Text>().text = Answers[3];
+        variantA.GetComponentInChildren<Text>().text = answers[0];
+        variantB.GetComponentInChildren<Text>().text = answers[1];
+        variantC.GetComponentInChildren<Text>().text = answers[2];
+        variantD.GetComponentInChildren<Text>().text = answers[3];
     }
 
     public void Finish()
     {
-        if ((SlotA.transform.GetChild(0).gameObject == VariantA && SlotC.transform.GetChild(0).gameObject == VariantD) ||
-            (SlotC.transform.GetChild(0).gameObject == VariantA && SlotA.transform.GetChild(0).gameObject == VariantD))
-            QuizSceneScript.Score += 1000;
+        if ((slotA.transform.GetChild(0).gameObject == variantA && slotC.transform.GetChild(0).gameObject == variantD) ||
+            (slotC.transform.GetChild(0).gameObject == variantA && slotA.transform.GetChild(0).gameObject == variantD))
+            QuizSceneScript.score[4] += 1000; 
 
-        if ((SlotB.transform.GetChild(0).gameObject == VariantB && SlotD.transform.GetChild(0).gameObject == VariantC) ||
-             (SlotD.transform.GetChild(0).gameObject == VariantB && SlotB.transform.GetChild(0).gameObject == VariantC))
-            QuizSceneScript.Score += 1000;
+        if ((slotB.transform.GetChild(0).gameObject == variantB && slotD.transform.GetChild(0).gameObject == variantC) ||
+             (slotD.transform.GetChild(0).gameObject == variantB && slotB.transform.GetChild(0).gameObject == variantC))
+            QuizSceneScript.score[4] += 1000;
 
         SceneManager.LoadScene("FinishScene");
     }
