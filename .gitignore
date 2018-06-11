@@ -12,3 +12,6 @@
 .vs/UnityQuiz/v15/Server/sqlite3/storage.ide
 .vs/UnityQuiz/v15/Server/sqlite3/storage.ide-shm
 .vs/UnityQuiz/v15/Server/sqlite3/storage.ide-wal
+
+Library/ShaderCache
+Library/PlayerDataCache
